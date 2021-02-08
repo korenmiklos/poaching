@@ -1,5 +1,48 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@0.9.0"></script><textarea>
 
 # A model of sales managers
+Why do market intermediares exist? The key idea is that sales managers help determine noncodifabile match quality based on experience with both parties.
 
-$$ (1 - q^n) - cn $$
+Consider the case of the real estate market first.
+## Real estate brokers
+To generate a sale, a buyer $x$ and seller $y$ has to meet and aggree to transact. Both buyers and sellers have noncodifiable knowledge about their match preferences: what are the hidden features of the apartment, what does the buyer like? 
+
+Because of these noncodifiable features, the viability of a match can only be determined if both $x$ and $y$ are known. To figure out whether $(x,y)$ is a match takes a cost $c$. For example, the buyer has to view the apartment.
+
+Because there are many buyers and many sellers, it is not feasible to test all possible matches for quality. This would take $cN^2$ cost, where $N$ is the number of sellers. (Assumed to be the same as the number of buyers.)
+
+Real estate brokers also pay this cost to find out match quality, but they can also keep apartments (or buyers, I will ignore the two-sided nature for now) on their inventory. This is essentially a search model with recall.
+
+Consider a broker who has $n$ apartments on her inventory. It takes a cost $f$ to put an apartment on inventory. She needs to talk to the seller, establish rapport etc.
+
+A new buyer approaches this broker. The probability that he will be a good match for a random seller is $1-q$. The probability of finding an apartment via this broker is $1-q^n$, increasing in $n$, but at a diminishing rate.
+
+If there are $k$ buyers approaching this broker, her expected profit will be
+$$
+k(1-q^n)-(kc+f)n.
+$$
+We have normalized the commission from a sale to 1 (WLOG) and assumed that $n\gg k$ so that the inventory does not decrease subsantially after successful sales. (This is an even better assumption when matches are non-exclusive: a seller can satisfy multiple buyers.)
+
+Note that while $c$ has to be paid for each buyer (they have to view the apartment), the initial cost can be spread across multiple buyers.
+
+Differentiating wrt $n$ and denoting $q=e^{-\lambda}$ gives the FOC
+$$
+\lambda e^{-\lambda n^*} = c+f/k,
+$$
+$$
+n^* = \frac 1\lambda
+	\ln\frac 
+	{\lambda}
+	{c+f/k}.
+$$
+The optimal number of apartments to keep on inventory is decreasing in the cost of figuring out match quality and increasing in the number of buyers.
+
+### Why do not buyers seek out apartments on their own? 
+Private buyers have access to the same technology, but for them $k=1$. If connecting to sellers is costly or if there are many potential buyers per broker, the optimal inventory of a broker is much larger than the optimal search strategy of a private buyer. 
+
+(In practice, brokers can specialize in different types of apartments, essentially increasing the likelihood of a good match, but here the difference between brokers and private buyers seems second order.)
+
+## Business-to-business sales
+We can think of B2B sales like real estate brokerage, but with different parameters. Finding an initial contact is not that costly ($f$ is low), but figuring out match quality is much more expensive ($c$ is high).
+
+As a result, there are no dedicated B2B brokerages. (But see trade fairs.) However, managers who *happen* to have many potential clients (or sellers) on their "inventory," are more valuable. That is, past experience of linking with buyers is valued in the market.
